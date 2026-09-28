@@ -1,0 +1,45 @@
+{
+  "status": "business_outcome",
+  "run_id": "rep-3ad8d734fe",
+  "mode": "replay",
+  "capability_id": "cap-lookup-member-savings",
+  "outputs": {},
+  "business_outcome": "MEMBER_NOT_FOUND",
+  "business_message": "Search returned no matching member",
+  "failed_step_id": null,
+  "expected": null,
+  "observed": "url=http://127.0.0.1:8765/search?q=99999\ntitle=Member file\nframe=main\nalerts: No matching member record.\naria_snapshot (Playwright YAML, mode=ai):\n# frame=hidden\n\n# frame=nav\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - generic [ref=f3e3]: FB\n    - generic [ref=f3e4]:\n      - generic [ref=f3e5]: Fieldbook\n      - generic [ref=f3e6]: Copperline Credit Union\n  - generic [ref=f3e7]:\n    - link \"01Member file\" [ref=f3e8] [cursor=pointer]:\n      - /url: /search\n    - link \"02Inquiry\" [ref=f3e9",
+  "error": null,
+  "traces": [
+    {
+      "step_id": "s01",
+      "intent": "sign_on",
+      "action": "click",
+      "observed": "url=http://127.0.0.1:8765/login\ntitle=Fieldbook logon\nframe=root\naria_snapshot (Playwright YAML, mode=ai):\n# frame=root\n- generic [active] [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e3]: FB\n    - generic [ref=e4]:\n      - generic [ref=e5]: Fieldbook 6.2\n      - generic [ref=e6]: Copperline Credit Union\n    - generic [ref=e7]: TERM 14US-CU-DEMO\n  - generic [ref=e8]:\n    - group \"Operator lo",
+      "ok": true,
+      "locator_used": "role_name role=button name='Sign On'",
+      "error": null
+    },
+    {
+      "step_id": "s02",
+      "intent": "enter_member_number",
+      "action": "type",
+      "observed": "url=http://127.0.0.1:8765/search\ntitle=Member file\nframe=main\naria_snapshot (Playwright YAML, mode=ai):\n# frame=hidden\n\n# frame=nav\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - generic [ref=f3e3]: FB\n    - generic [ref=f3e4]:\n      - generic [ref=f3e5]: Fieldbook\n      - generic [ref=f3e6]: Copperline Credit Union\n  - generic [ref=f3e7]:\n    - link \"01Member file\" [ref=f3e8] [cursor=pointer",
+      "ok": true,
+      "locator_used": "role_name role=textbox name='Member number' frame=main",
+      "error": null
+    },
+    {
+      "step_id": "s03",
+      "intent": "search_member",
+      "action": "click",
+      "observed": "url=http://127.0.0.1:8765/search\ntitle=Member file\nframe=main\naria_snapshot (Playwright YAML, mode=ai):\n# frame=hidden\n\n# frame=nav\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - generic [ref=f3e3]: FB\n    - generic [ref=f3e4]:\n      - generic [ref=f3e5]: Fieldbook\n      - generic [ref=f3e6]: Copperline Credit Union\n  - generic [ref=f3e7]:\n    - link \"01Member file\" [ref=f3e8] [cursor=pointer",
+      "ok": true,
+      "locator_used": "role_name role=button name='Search' frame=main",
+      "error": null
+    }
+  ],
+  "evidence_dir": "evidence/runs/rep-3ad8d734fe",
+  "intervention_id": null,
+  "human_actions": []
+}

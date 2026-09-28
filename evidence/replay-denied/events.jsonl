@@ -1,0 +1,6 @@
+{"ts": "2026-09-28T04:23:01.383806+00:00", "kind": "replay_start", "capability": "lookup-member-savings-balance", "variant": "base", "tenant": null, "params": {"member_id": "00000"}}
+{"ts": "2026-09-28T04:23:01.857352+00:00", "kind": "step_ok", "step": "s01", "locator": "role_name role=button name='Sign On'"}
+{"ts": "2026-09-28T04:23:02.952775+00:00", "kind": "recoverable", "code": "MAINTENANCE_NOTICE"}
+{"ts": "2026-09-28T04:23:04.242287+00:00", "kind": "step_ok", "step": "s02", "locator": "role_name role=textbox name='Member number' frame=main"}
+{"ts": "2026-09-28T04:23:05.524651+00:00", "kind": "step_ok", "step": "s03", "locator": "role_name role=button name='Search' frame=main"}
+{"ts": "2026-09-28T04:23:06.611130+00:00", "kind": "business_outcome", "code": "PERMISSION_DENIED", "screenshot": "evidence/runs/rep-ace5144607/outcome-PERMISSION_DENIED.png"}

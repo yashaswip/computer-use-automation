@@ -1,0 +1,34 @@
+# Safety policy for the Fieldbook demo surface.
+# Production would bind a policy per tenant + vendor product.
+
+id: fieldbook-demo
+allowed_hosts:
+  - 127.0.0.1
+  - localhost
+allowed_url_prefixes:
+  - http://127.0.0.1:8765
+  - http://localhost:8765
+allowed_actions:
+  - navigate
+  - click
+  - type
+  - select
+  - press
+  - extract
+  - wait
+  - dismiss
+forbidden_url_patterns:
+  - "/admin/wire"
+  - "/admin/purge"
+irreversible_intents:
+  - submit_new_account
+  - confirm_open_account
+max_steps: 25
+max_duration_seconds: 180
+sensitive_param_names:
+  - password
+  - ssn
+  - tax_id
+  - account_number
+  - token
+  - secret

@@ -1,0 +1,7 @@
+{"ts": "2026-09-28T04:22:46.115557+00:00", "kind": "replay_start", "capability": "lookup-member-savings-balance", "variant": "base", "tenant": null, "params": {"member_id": "12345"}}
+{"ts": "2026-09-28T04:22:46.595966+00:00", "kind": "step_ok", "step": "s01", "locator": "role_name role=button name='Sign On'"}
+{"ts": "2026-09-28T04:22:47.729358+00:00", "kind": "recoverable", "code": "MAINTENANCE_NOTICE"}
+{"ts": "2026-09-28T04:22:49.025996+00:00", "kind": "step_ok", "step": "s02", "locator": "role_name role=textbox name='Member number' frame=main"}
+{"ts": "2026-09-28T04:22:50.314341+00:00", "kind": "step_ok", "step": "s03", "locator": "role_name role=button name='Search' frame=main"}
+{"ts": "2026-09-28T04:22:51.667313+00:00", "kind": "step_ok", "step": "s04", "locator": "role_name role=link name='Open member 12345' frame=main"}
+{"ts": "2026-09-28T04:22:52.743980+00:00", "kind": "step_ok", "step": "s05", "locator": "extract savings_balance"}

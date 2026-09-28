@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirmation</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="banner">Sub-Account Opened</div>
+  <p class="ok" role="status">Transaction accepted.</p>
+  <table class="grid" role="table" aria-label="New account confirmation">
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td>Member</td><td>{{ member.id }}</td></tr>
+    <tr><td>Name</td><td>{{ member.name }}</td></tr>
+    <tr><td>Product</td><td>{{ product }}</td></tr>
+    <tr><td>Nickname</td><td>{{ nickname }}</td></tr>
+    <tr>
+      <td>Account no.</td>
+      <td aria-label="New account number">{{ account_number }}</td>
+    </tr>
+  </table>
+  <p style="margin:12px"><a href="/member/{{ member.id }}" aria-label="Return to member">Return to member</a></p>
+</body>
+</html>

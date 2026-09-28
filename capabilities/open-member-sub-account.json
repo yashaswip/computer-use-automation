@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "artifact_version": 1,
+  "id": "cap-open-sub-account",
+  "slug": "open-member-sub-account",
+  "title": "Open member sub-account",
+  "description": "From Fieldbook at Copperline, open a new savings sub-account for a member and read the confirmation account number. Submit is irreversible and gated.",
+  "variant": {
+    "vendor_product": "fieldbook",
+    "variant_id": "base",
+    "tenant_id": null,
+    "app_version": "6.2"
+  },
+  "entry": {
+    "kind": "web",
+    "url": "http://127.0.0.1:8765/login",
+    "app_id": "fieldbook-6.2"
+  },
+  "parameters": [
+    { "name": "member_id", "type": "string", "required": true, "description": "Member number", "example": "12345", "sensitive": false },
+    { "name": "product", "type": "enum", "required": true, "description": "Product type", "enum": ["SAVINGS", "MONEY_MARKET"], "example": "SAVINGS", "sensitive": false },
+    { "name": "nickname", "type": "string", "required": false, "description": "Optional nickname", "example": "Rainy day", "sensitive": false }
+  ],
+  "outputs": [
+    { "name": "account_number", "type": "string", "description": "New account number on confirmation", "sensitive": true }
+  ],
+  "steps": [
+    {
+      "id": "s01",
+      "intent": "sign_on",
+      "action": "click",
+      "target": {
+        "description": "Sign On",
+        "primary": { "kind": "role_name", "role": "button", "name": "Sign On", "exact": false, "nth": 0 },
+        "fallbacks": [{ "kind": "text", "text": "Sign On", "exact": false }]
+      },
+      "risk": "safe",
+      "on_failure": "abort"
+    },
+    {
+      "id": "s02",
+      "intent": "enter_member_number",
+      "action": "type",
+      "target": {
+        "description": "Member number",
+        "primary": { "kind": "role_name", "role": "textbox", "name": "Member number", "exact": false, "frame": "main" },
+        "fallbacks": [{ "kind": "label", "label": "Member number", "exact": false, "frame": "main" }]
+      },
+      "value": { "source": "parameter", "parameter": "member_id" },
+      "risk": "safe"
+    },
+    {
+      "id": "s03",
+      "intent": "search_member",
+      "action": "click",
+      "target": {
+        "description": "Search",
+        "primary": { "kind": "role_name", "role": "button", "name": "Search", "exact": false, "frame": "main" },
+        "fallbacks": []
+      },
+      "risk": "safe",
+      "on_failure": "map_business_outcome"
+    },
+    {
+      "id": "s04",
+      "intent": "open_member_record",
+      "action": "click",
+      "target": {
+        "description": "Open member",
+        "primary": { "kind": "role_name", "role": "link", "name": "Open member {{member_id}}", "exact": false, "frame": "main" },
+        "fallbacks": [{ "kind": "text", "text": "Open", "exact": false, "frame": "main" }]
+      },
+      "risk": "safe"
+    },
+    {
+      "id": "s05",
+      "intent": "open_sub_account_form",
+      "action": "click",
+      "target": {
+        "description": "Open Sub-Account",
+        "primary": { "kind": "role_name", "role": "link", "name": "Open sub-account", "exact": false, "frame": "main" },
+        "fallbacks": [{ "kind": "text", "text": "Open Sub-Account", "exact": false, "frame": "main" }]
+      },
+      "risk": "safe"
+    },
+    {
+      "id": "s06",
+      "intent": "choose_product",
+      "action": "select",
+      "target": {
+        "description": "Product type",
+        "primary": { "kind": "role_name", "role": "combobox", "name": "Product type", "exact": false, "frame": "main" },
+        "fallbacks": [{ "kind": "label", "label": "Product type", "exact": false, "frame": "main" }]
+      },
+      "value": { "source": "parameter", "parameter": "product" },
+      "risk": "reversible"
+    },
+    {
+      "id": "s07",
+      "intent": "enter_nickname",
+      "action": "type",
+      "target": {
+        "description": "Nickname",
+        "primary": { "kind": "role_name", "role": "textbox", "name": "Nickname", "exact": false, "frame": "main" },
+        "fallbacks": []
+      },
+      "value": { "source": "parameter", "parameter": "nickname" },
+      "risk": "reversible"
+    },
+    {
+      "id": "s08",
+      "intent": "submit_new_account",
+      "action": "click",
+      "target": {
+        "description": "Submit",
+        "primary": { "kind": "role_name", "role": "button", "name": "Submit", "exact": false, "frame": "main" },
+        "fallbacks": []
+      },
+      "risk": "irreversible",
+      "on_failure": "abort",
+      "notes": "Replay pauses for operator confirmation unless --approve-irreversible."
+    },
+    {
+      "id": "s09",
+      "intent": "read_new_account_number",
+      "action": "extract",
+      "target": {
+        "description": "New account number",
+        "primary": { "kind": "role_name", "role": "cell", "name": "New account number", "exact": false, "frame": "main" },
+        "fallbacks": [{ "kind": "css", "css": "td[aria-label='New account number']", "frame": "main" }]
+      },
+      "extract": { "output": "account_number" },
+      "risk": "safe"
+    }
+  ],
+  "checkpoint": {
+    "description": "Confirmation that the sub-account was opened",
+    "all_of": [{ "kind": "text_present", "text": "Transaction accepted" }]
+  },
+  "business_outcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "description": "Search returned no matching member",
+      "all_of": [{ "kind": "text_present", "text": "No matching member record" }]
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "description": "Operator cannot view this record",
+      "all_of": [{ "kind": "text_present", "text": "Permission denied" }]
+    },
+    {
+      "code": "VALIDATION_ERROR",
+      "description": "Form rejected the input",
+      "all_of": [{ "kind": "text_present", "text": "Nickname exceeds" }]
+    }
+  ],
+  "recoverables": [
+    {
+      "code": "MAINTENANCE_NOTICE",
+      "description": "Dismiss scheduled-maintenance interstitial",
+      "all_of": [{ "kind": "text_present", "text": "Scheduled maintenance notice" }],
+      "action": "click",
+      "target": {
+        "description": "Acknowledge",
+        "primary": { "kind": "role_name", "role": "button", "name": "Acknowledge", "exact": false, "frame": "main" },
+        "fallbacks": []
+      },
+      "max_times": 1
+    }
+  ],
+  "overlays": [],
+  "policy_id": "fieldbook-demo",
+  "provenance": {
+    "discovery_run_id": "seed-canonical",
+    "model": "none-canonical-reviewed",
+    "created_at": "2026-09-21T00:00:00+00:00",
+    "goal_redacted": "open a new sub-account for member {member_id}"
+  }
+}

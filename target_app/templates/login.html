@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fieldbook logon</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="mast">
+    <div class="mark">FB</div>
+    <div>
+      <div class="product">Fieldbook 6.2</div>
+      <div class="inst">{{ labels.institution }}</div>
+    </div>
+    <div class="term">TERM 14<br>US-CU-DEMO</div>
+  </div>
+  <div class="login-wrap">
+    <div>
+      {% if notice == "timeout" %}
+        <p class="err">Session expired. Sign on again.</p>
+      {% elif notice == "signed_off" %}
+        <p class="subbanner">Signed off.</p>
+      {% endif %}
+      {% if error %}
+        <p class="err">{{ error }}</p>
+      {% endif %}
+      <form method="post" action="/login">
+        <table class="form" role="group" aria-label="Operator logon">
+          <tr>
+            <td>Operator ID</td>
+            <td><input type="text" name="username" aria-label="Operator ID" value="operator"></td>
+          </tr>
+          <tr>
+            <td>Password</td>
+            <td><input type="password" name="password" aria-label="Password" value="fieldbook"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="submit" value="{{ labels.sign_on }}" aria-label="{{ labels.sign_on }}"></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+    <aside class="shift">
+      <h2>Shift note</h2>
+      <p>Inquiry is up through the batch window. File 00000 is locked to this desk. Demo logon is operator / fieldbook.</p>
+    </aside>
+  </div>
+  <div class="tape">HARROW SYSTEMS · FIELDBOOK 6.2 · DO NOT LEAVE A MEMBER FILE OPEN</div>
+</body>
+</html>

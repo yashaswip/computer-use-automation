@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "artifact_version": 1,
+  "id": "cap-lookup-member-savings",
+  "slug": "lookup-member-savings-balance",
+  "title": "Lookup member savings balance",
+  "description": "Sign on to Fieldbook at Copperline, dismiss the maintenance notice if shown, search a member, open the inquiry screen, and read the savings balance.",
+  "variant": {
+    "vendor_product": "fieldbook",
+    "variant_id": "base",
+    "tenant_id": null,
+    "app_version": "6.2"
+  },
+  "entry": {
+    "kind": "web",
+    "url": "http://127.0.0.1:8765/login",
+    "app_id": "fieldbook-6.2"
+  },
+  "parameters": [
+    {
+      "name": "member_id",
+      "type": "string",
+      "required": true,
+      "description": "Member number as shown on the search screen",
+      "enum": null,
+      "example": "12345",
+      "sensitive": false
+    }
+  ],
+  "outputs": [
+    {
+      "name": "savings_balance",
+      "type": "string",
+      "description": "Current savings balance text from member inquiry",
+      "sensitive": false
+    }
+  ],
+  "steps": [
+    {
+      "id": "s01",
+      "intent": "sign_on",
+      "action": "click",
+      "target": {
+        "description": "Sign On",
+        "primary": {
+          "kind": "role_name",
+          "role": "button",
+          "name": "Sign On",
+          "exact": false,
+          "nth": 0,
+          "frame": null
+        },
+        "fallbacks": [
+          {
+            "kind": "text",
+            "text": "Sign On",
+            "exact": false,
+            "frame": null
+          }
+        ]
+      },
+      "value": null,
+      "extract": null,
+      "wait": { "timeout_ms": 8000, "settle_ms": 150 },
+      "risk": "safe",
+      "on_failure": "abort",
+      "notes": "Demo logon is pre-filled. Password is never stored on the artifact."
+    },
+    {
+      "id": "s02",
+      "intent": "enter_member_number",
+      "action": "type",
+      "target": {
+        "description": "Member number field",
+        "primary": {
+          "kind": "role_name",
+          "role": "textbox",
+          "name": "Member number",
+          "exact": false,
+          "nth": 0,
+          "frame": "main"
+        },
+        "fallbacks": [
+          {
+            "kind": "label",
+            "label": "Member number",
+            "exact": false,
+            "frame": "main"
+          }
+        ]
+      },
+      "value": {
+        "source": "parameter",
+        "parameter": "member_id",
+        "redact": false
+      },
+      "extract": null,
+      "wait": { "timeout_ms": 8000, "settle_ms": 150 },
+      "risk": "safe",
+      "on_failure": "abort",
+      "notes": null
+    },
+    {
+      "id": "s03",
+      "intent": "search_member",
+      "action": "click",
+      "target": {
+        "description": "Search",
+        "primary": {
+          "kind": "role_name",
+          "role": "button",
+          "name": "Search",
+          "exact": false,
+          "nth": 0,
+          "frame": "main"
+        },
+        "fallbacks": [
+          {
+            "kind": "text",
+            "text": "Search",
+            "exact": false,
+            "frame": "main"
+          }
+        ]
+      },
+      "value": null,
+      "extract": null,
+      "wait": { "timeout_ms": 8000, "settle_ms": 200 },
+      "risk": "safe",
+      "on_failure": "map_business_outcome",
+      "notes": null
+    },
+    {
+      "id": "s04",
+      "intent": "open_member_record",
+      "action": "click",
+      "target": {
+        "description": "Open member from results",
+        "primary": {
+          "kind": "role_name",
+          "role": "link",
+          "name": "Open member 12345",
+          "exact": false,
+          "nth": 0,
+          "frame": "main"
+        },
+        "fallbacks": [
+          {
+            "kind": "role_name",
+            "role": "link",
+            "name": "Open",
+            "exact": false,
+            "nth": 0,
+            "frame": "main"
+          },
+          {
+            "kind": "text",
+            "text": "Open",
+            "exact": false,
+            "frame": "main"
+          }
+        ]
+      },
+      "value": null,
+      "extract": null,
+      "wait": { "timeout_ms": 8000, "settle_ms": 150 },
+      "risk": "safe",
+      "on_failure": "map_business_outcome",
+      "notes": "Primary name is an example; fallback uses generic Open. Parameterized name is a known overlay point."
+    },
+    {
+      "id": "s05",
+      "intent": "read_savings_balance",
+      "action": "extract",
+      "target": {
+        "description": "Savings balance cell",
+        "primary": {
+          "kind": "role_name",
+          "role": "cell",
+          "name": "Savings balance",
+          "exact": false,
+          "nth": 0,
+          "frame": "main"
+        },
+        "fallbacks": [
+          {
+            "kind": "css",
+            "css": "td[aria-label='Savings balance']",
+            "frame": "main"
+          }
+        ]
+      },
+      "value": null,
+      "extract": { "output": "savings_balance", "from_attribute": null },
+      "wait": { "timeout_ms": 8000, "settle_ms": 150 },
+      "risk": "safe",
+      "on_failure": "abort",
+      "notes": "CSS fallback is last resort; a11y name is preferred because it survives markup churn."
+    }
+  ],
+  "checkpoint": {
+    "description": "Member inquiry screen is showing",
+    "all_of": [
+      { "kind": "text_present", "text": "Member Inquiry" }
+    ]
+  },
+  "business_outcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "description": "Search returned no matching member",
+      "all_of": [{ "kind": "text_present", "text": "No matching member record" }]
+    },
+    {
+      "code": "PERMISSION_DENIED",
+      "description": "Operator cannot view this record",
+      "all_of": [{ "kind": "text_present", "text": "Permission denied" }]
+    },
+    {
+      "code": "SESSION_EXPIRED",
+      "description": "Host signed the operator off",
+      "all_of": [{ "kind": "text_present", "text": "Session expired" }]
+    }
+  ],
+  "recoverables": [
+    {
+      "code": "MAINTENANCE_NOTICE",
+      "description": "Dismiss scheduled-maintenance interstitial",
+      "all_of": [{ "kind": "text_present", "text": "Scheduled maintenance notice" }],
+      "action": "click",
+      "target": {
+        "description": "Acknowledge",
+        "primary": {
+          "kind": "role_name",
+          "role": "button",
+          "name": "Acknowledge",
+          "exact": false,
+          "nth": 0,
+          "frame": "main"
+        },
+        "fallbacks": []
+      },
+      "max_times": 1
+    }
+  ],
+  "overlays": [],
+  "policy_id": "fieldbook-demo",
+  "provenance": {
+    "discovery_run_id": "seed-canonical",
+    "model": "none-canonical-reviewed",
+    "created_at": "2026-09-21T00:00:00+00:00",
+    "goal_redacted": "look up member {member_id} and read their current savings balance"
+  }
+}

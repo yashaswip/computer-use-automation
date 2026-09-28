@@ -1,0 +1,7 @@
+{"ts": "2026-09-28T04:23:07.792381+00:00", "kind": "replay_start", "capability": "lookup-member-savings-balance", "variant": "lakeshore", "tenant": "lakeshore-cu", "params": {"member_id": "12345"}}
+{"ts": "2026-09-28T04:23:08.251046+00:00", "kind": "step_ok", "step": "s01", "locator": "role_name role=button name='Log On'"}
+{"ts": "2026-09-28T04:23:09.374786+00:00", "kind": "recoverable", "code": "MAINTENANCE_NOTICE"}
+{"ts": "2026-09-28T04:23:10.662957+00:00", "kind": "step_ok", "step": "s02", "locator": "role_name role=textbox name='Account number' frame=main"}
+{"ts": "2026-09-28T04:23:11.953584+00:00", "kind": "step_ok", "step": "s03", "locator": "role_name role=button name='Find' frame=main"}
+{"ts": "2026-09-28T04:23:13.289731+00:00", "kind": "step_ok", "step": "s04", "locator": "role_name role=link name='Open member 12345' frame=main"}
+{"ts": "2026-09-28T04:23:14.363049+00:00", "kind": "step_ok", "step": "s05", "locator": "extract savings_balance"}

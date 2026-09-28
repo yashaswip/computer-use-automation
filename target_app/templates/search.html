@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Member file</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="mast">
+    <div class="mark">01</div>
+    <div>
+      <div class="product">Member file</div>
+      <div class="inst">{{ labels.institution }} · {{ labels.vendor }}</div>
+    </div>
+    <div class="term">INQ-MEM<br>ONLINE</div>
+  </div>
+
+  <form method="get" action="/search">
+    <table class="form" role="group" aria-label="Member search">
+      <tr>
+        <td>{{ labels.member_field }}</td>
+        <td><input type="text" name="q" aria-label="{{ labels.member_field }}" value="{{ q }}"></td>
+        <td><input type="submit" value="{{ labels.search }}" aria-label="{{ labels.search }}"></td>
+      </tr>
+    </table>
+  </form>
+
+  {% if outcome == "not_found" %}
+    <p class="err" role="alert">No matching member record.</p>
+  {% elif outcome == "denied" %}
+    <p class="err" role="alert">Permission denied for this record.</p>
+  {% endif %}
+
+  {% if result %}
+    <table class="grid" role="table" aria-label="Search results">
+      <tr>
+        <th>Member</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>{{ result.id }}</td>
+        <td>{{ result.name }}</td>
+        <td>{{ result.status }}</td>
+        <td><a href="/member/{{ result.id }}" aria-label="Open member {{ result.id }}">Open</a></td>
+      </tr>
+    </table>
+  {% endif %}
+  <div class="tape">FILE DESK · BRANCH TAPE LOADS AT 02:00</div>
+</body>
+</html>

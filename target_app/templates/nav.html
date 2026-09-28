@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="navplate skin-{{ skin }}">
+  <div class="mast">
+    <div class="mark">FB</div>
+    <div>
+      <div class="product">Fieldbook</div>
+      <div class="inst">{{ labels.institution }}</div>
+    </div>
+  </div>
+  <div class="nav">
+    <a href="/search" target="main"><span class="fn">01</span>Member file</a>
+    <a href="/search" target="main"><span class="fn">02</span>Inquiry</a>
+    <a href="/logout" target="_top"><span class="fn">09</span>Sign off</a>
+  </div>
+  <p class="who">{{ user or "no operator" }}</p>
+</body>
+</html>

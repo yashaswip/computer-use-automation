@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open Sub-Account</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="banner">Open Sub-Account — {{ member.id }}</div>
+  <div class="subbanner">This posts a new product to the member record.</div>
+  {% if error %}
+    <p class="err" role="alert">{{ error }}</p>
+  {% endif %}
+  <form method="post" action="/member/{{ member.id }}/open">
+    <table class="form" role="group" aria-label="Open sub-account">
+      <tr>
+        <td>Product type</td>
+        <td>
+          <select name="product" aria-label="Product type">
+            <option value="SAVINGS">SAVINGS</option>
+            <option value="MONEY_MARKET">MONEY_MARKET</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Nickname</td>
+        <td><input type="text" name="nickname" aria-label="Nickname" maxlength="24"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" value="Submit" aria-label="Submit"></td>
+      </tr>
+    </table>
+  </form>
+</body>
+</html>

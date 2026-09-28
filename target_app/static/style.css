@@ -1,0 +1,270 @@
+/* Fieldbook 6.2. Copperline is manila and copper; Lakeshore is fog and harbor blue.
+   Same tables, same frames. The brand kit is the only thing a tenant overlay should need. */
+
+:root,
+body.skin-copperline {
+  --bar: #6e3418;
+  --paper: #f3ead9;
+  --manila: #e4d3b4;
+  --ink: #241910;
+  --rule: #d7a15a;
+  --grid: #31402a;
+  --slip: #f6e4c2;
+  --muted: #6d5844;
+}
+
+body.skin-lakeshore {
+  --bar: #16324a;
+  --paper: #e7eef1;
+  --manila: #d3e0e6;
+  --ink: #142028;
+  --rule: #8fb4c6;
+  --grid: #1d4038;
+  --slip: #e3eef3;
+  --muted: #3e5560;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Palatino, "Palatino Linotype", "Iowan Old Style", Georgia, serif;
+  font-size: 14px;
+}
+
+.mast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bar);
+  color: #f7f1e6;
+  padding: 10px 14px 8px;
+  border-bottom: 4px solid var(--rule);
+}
+
+.mark {
+  width: 34px;
+  height: 34px;
+  border: 1.5px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  flex: none;
+}
+
+.product {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.inst {
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+.term {
+  margin-left: auto;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  color: var(--rule);
+  text-align: right;
+  line-height: 1.35;
+}
+
+.banner {
+  background: var(--bar);
+  color: #f7f1e6;
+  padding: 8px 12px;
+  border-bottom: 4px solid var(--rule);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 13px;
+}
+
+.subbanner {
+  background: var(--manila);
+  color: var(--muted);
+  padding: 5px 12px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  border-bottom: 1px solid var(--rule);
+}
+
+table.form {
+  background: transparent;
+  border-collapse: collapse;
+  margin: 16px 14px;
+}
+
+table.form td {
+  padding: 7px 10px 7px 0;
+  vertical-align: baseline;
+}
+
+table.form td:first-child {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+table.grid {
+  border-collapse: collapse;
+  margin: 8px 14px 16px;
+  background: #fffdf8;
+  min-width: 420px;
+}
+
+table.grid th,
+table.grid td {
+  border-bottom: 1px solid var(--manila);
+  padding: 7px 10px;
+  text-align: left;
+}
+
+table.grid th {
+  background: var(--grid);
+  color: #f4ecdc;
+  font-weight: normal;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+table.grid tr:nth-child(even) td {
+  background: rgba(49, 64, 42, 0.04);
+}
+
+input[type=text],
+input[type=password],
+select {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  background: transparent;
+  color: var(--ink);
+  border: 0;
+  border-bottom: 1.5px solid var(--ink);
+  padding: 3px 2px;
+  width: 12em;
+}
+
+input[type=submit] {
+  font-family: Palatino, Georgia, serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f7f1e6;
+  background: var(--bar);
+  border: 0;
+  border-bottom: 3px solid var(--rule);
+  padding: 7px 16px;
+  cursor: pointer;
+}
+
+a {
+  color: var(--bar);
+}
+
+.err {
+  color: #8c2a1a;
+  font-weight: bold;
+  margin: 12px 14px;
+}
+
+.ok {
+  color: var(--grid);
+  font-weight: bold;
+  margin: 12px 14px;
+}
+
+.notice-box {
+  margin: 28px 16px;
+  max-width: 460px;
+  background: var(--slip);
+  border-left: 7px solid var(--bar);
+  padding: 14px 16px 18px;
+}
+
+.notice-box .kicker {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  margin: 0 0 6px;
+}
+
+.login-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.shift {
+  margin: 22px 18px 0 0;
+  width: 230px;
+  background: var(--slip);
+  border-top: 3px solid var(--rule);
+  padding: 10px 12px 14px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.shift h2 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+
+.shift p {
+  margin: 0;
+}
+
+.tape {
+  margin-top: 22px;
+  padding: 6px 12px;
+  background: var(--ink);
+  color: var(--rule);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+}
+
+body.navplate {
+  background: var(--ink);
+  color: var(--paper);
+  min-height: 100vh;
+}
+
+.nav a {
+  display: block;
+  padding: 9px 10px;
+  color: var(--paper);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(247, 241, 230, 0.12);
+  font-size: 13px;
+}
+
+.nav a:hover {
+  background: var(--bar);
+}
+
+.fn {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--rule);
+  margin-right: 6px;
+  font-size: 11px;
+}
+
+.who {
+  padding: 10px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  color: var(--rule);
+}

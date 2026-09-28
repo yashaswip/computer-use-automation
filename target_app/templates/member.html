@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Member {{ member.id }}</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="mast">
+    <div class="mark">02</div>
+    <div>
+      <div class="product">Member Inquiry</div>
+      <div class="inst">{{ member.id }} · {{ member.name }}</div>
+    </div>
+    <div class="term">{{ member.branch }}<br>{{ member.status }}</div>
+  </div>
+
+  <table class="grid" role="table" aria-label="Member balances">
+    <tr>
+      <th>Product</th>
+      <th>Balance</th>
+    </tr>
+    <tr>
+      <td>{{ labels.savings_label }}</td>
+      <td aria-label="{{ labels.savings_name }}">{{ member.savings_balance }}</td>
+    </tr>
+    <tr>
+      <td>{{ labels.checking_label }}</td>
+      <td aria-label="{{ labels.checking_name }}">{{ member.checking_balance }}</td>
+    </tr>
+  </table>
+
+  <p style="margin:12px 14px">
+    <a href="/member/{{ member.id }}/open" aria-label="Open sub-account">Open sub-account</a>
+    &nbsp;&nbsp;
+    <a href="/search" aria-label="Back to search">Back to the file</a>
+  </p>
+</body>
+</html>

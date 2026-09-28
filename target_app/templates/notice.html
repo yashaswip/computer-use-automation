@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Batch notice</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="skin-{{ skin }}">
+  <div class="mast">
+    <div class="mark">FB</div>
+    <div>
+      <div class="product">{{ labels.vendor }}</div>
+      <div class="inst">{{ labels.institution }}</div>
+    </div>
+  </div>
+  <div class="notice-box" role="dialog" aria-label="Scheduled maintenance notice">
+    <p class="kicker">NIGHT DESK</p>
+    <p><strong>Scheduled maintenance notice</strong></p>
+    <p>Batch window 02:00–02:20 local. Inquiry remains available. Acknowledge before you pull a file.</p>
+    <form method="post" action="/notice/ack">
+      <input type="submit" value="{{ labels.ack }}" aria-label="{{ labels.ack }}">
+    </form>
+  </div>
+</body>
+</html>
