@@ -1,6 +1,4 @@
-# Computer-use automation: discover once, replay many
-
-Yashaswi Patki. Take-home for interface.ai, Applied AI Engineer.
+# Automation: discover once, replay many
 
 A small but complete **record-once / replay-many** layer for AI agents that must operate legacy UIs with no API.
 
